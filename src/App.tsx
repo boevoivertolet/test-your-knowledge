@@ -25,10 +25,16 @@ export const App: FC<IApp> = memo(({ data }) => {
       return (
             <div>
                   <div>
-                        <div>{filteredQuestions[0].question}</div>
-                        <button disabled={viewAnswer} onClick={() => setViewAnswer(true)}>
-                              Show answer
-                        </button>
+                        {viewQuestionId === 0 ? (
+                              <h1>Hello, let's try to check your knowledge</h1>
+                        ) : (
+                              <div>{filteredQuestions[0].question}</div>
+                        )}
+                        {alreadyArr.length > 0 && (
+                              <button disabled={viewAnswer} onClick={() => setViewAnswer(true)}>
+                                    Show answer
+                              </button>
+                        )}
                   </div>
                   {viewQuestionId !== 0 ? (
                         <button disabled={isDisabled} onClick={onClickHandler}>
