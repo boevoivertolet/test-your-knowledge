@@ -1,8 +1,8 @@
 import React, { FC, memo, useState } from 'react'
 import { DataType } from './data/data'
-
 import { utils } from './utils/utils'
-
+import styles from './App.module.css'
+import { Greetings } from './Greetings'
 export const App: FC<IApp> = memo(({ data }) => {
       const [viewQuestionId, setViewQuestionId] = useState<number>(0)
       const [viewAnswer, setViewAnswer] = useState<boolean>(false)
@@ -23,27 +23,29 @@ export const App: FC<IApp> = memo(({ data }) => {
       }
 
       return (
-            <div>
+            <div className={styles.app_wrapper}>
+                  {viewQuestionId !== 0 && <div className={styles.question}>{filteredQuestions[0].question}</div>}
+                  <div className={styles.greetings_wrapper}>
+                        <Greetings viewQuestionId={viewQuestionId} />
+                  </div>
+                  <div className={styles.answer}>{viewAnswer && filteredQuestions[0].answer}</div>
                   <div>
-                        {viewQuestionId === 0 ? (
-                              <h1>Hello, let's try to check your knowledge</h1>
-                        ) : (
-                              <div>{filteredQuestions[0].question}</div>
-                        )}
                         {alreadyArr.length > 0 && (
-                              <button disabled={viewAnswer} onClick={() => setViewAnswer(true)}>
-                                    Show answer
+                              <button className={styles.btn} disabled={isDisabled} onClick={() => setViewAnswer(true)}>
+                                    Показать ответ
+                              </button>
+                        )}
+
+                        {viewQuestionId !== 0 ? (
+                              <button className={styles.btn} disabled={isDisabled} onClick={onClickHandler}>
+                                    Следующий вопрос
+                              </button>
+                        ) : (
+                              <button className={styles.btn} disabled={isDisabled} onClick={onClickHandler}>
+                                    Начать проверку знаний
                               </button>
                         )}
                   </div>
-                  {viewQuestionId !== 0 ? (
-                        <button disabled={isDisabled} onClick={onClickHandler}>
-                              Next question
-                        </button>
-                  ) : (
-                        <button onClick={onClickHandler}>Get Started</button>
-                  )}
-                  <div>{viewAnswer && filteredQuestions[0].answer}</div>
             </div>
       )
 })
