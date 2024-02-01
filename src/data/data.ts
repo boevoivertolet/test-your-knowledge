@@ -1,5 +1,5 @@
 export const data: DataType = [
-      { id: 0, question: '0', answer: '0' },
+      { id: 0, question: '', answer: '' },
       {
             id: 1,
             question: 'Что такое HTML и какие основные теги вы знаете?',
