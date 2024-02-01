@@ -17,7 +17,7 @@ export const App: FC<IApp> = memo(({ data }) => {
                   setViewQuestionId(randomId)
                   setViewAnswer(false)
                   setIsDisabled(false)
-            }, 1500)
+            }, 200)
       }
 
       const onClickHandler = () => {
